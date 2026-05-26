@@ -1,11 +1,18 @@
 .container-layout {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  min-height: 100vh;
 }
 
 .container-main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
   min-height: calc(100vh - 70px);
-  padding: 1rem 0;
+}
+
+@media (max-width: 640px) {
+  .container-main {
+    padding: 1rem 0.75rem;
+  }
 }

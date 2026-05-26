@@ -82,26 +82,27 @@ function TaskFlow() {
   };
 
   return (
-    <div className="p-6 w-full min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-800 flex items-center justify-center">
-      <div className="flex items-center justify-center flex-col gap-4 w-full max-w-6xl">
-        <h1 className="font-bold mb-8 text-4xl text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-500 to-rose-400">
+    <div className="w-full py-6">
+      <div className="flex flex-col items-center gap-6 w-full">
+        <h1 className="font-bold text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-500 to-rose-400">
           TaskFlow
         </h1>
 
-        <div className="mb-8 flex w-full max-w-lg shadow-lg rounded-lg overflow-hidden">
+        {/* Input de nova task */}
+        <div className="flex flex-col sm:flex-row w-full max-w-lg shadow-lg rounded-lg overflow-hidden">
           <input
             type="text"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
             placeholder="Add a new task..."
-            className="flex-grow p-3 bg-zinc-700 text-white"
+            className="flex-grow p-3 bg-zinc-700 text-white placeholder-zinc-400 outline-none"
             onKeyDown={(e) => e.key === 'Enter' && addNewTask()}
           />
 
           <select
             value={activeColumn}
             onChange={(e) => setActiveColumn(e.target.value)}
-            className="p-3 bg-zinc-700 text-white border-0 border-l border-zinc-600"
+            className="p-3 bg-zinc-700 text-white border-l border-zinc-600 outline-none"
           >
             {Object.keys(columns).map((columnId) => (
               <option value={columnId} key={columnId}>
@@ -118,22 +119,23 @@ function TaskFlow() {
           </button>
         </div>
 
-        <div className="flex gap-6 overflow-x-auto pb-6 w-full">
+        {/* Colunas do Kanban */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
           {Object.keys(columns).map((columnId) => (
             <div
               key={columnId}
-              className={`flex-shrink-0 w-80 rounded-md shadow-xl border-t-4 ${columnStyle[columnId].border}`}
+              className={`rounded-lg shadow-xl border-t-4 ${columnStyle[columnId].border} overflow-hidden`}
               onDragOver={handleDragOver}
               onDrop={(e) => handleDrop(e, columnId)}
             >
-              <div className={`p-4 text-white font-bold text-xl rounded-t-md ${columnStyle[columnId].header}`}>
+              <div className={`p-4 text-white font-bold text-lg ${columnStyle[columnId].header}`}>
                 {columns[columnId].name}
-                <span className="ml-2 px-2 py-1 bg-zinc-800 bg-opacity-30 rounded-full text-sm">
+                <span className="ml-2 px-2 py-0.5 bg-black/30 rounded-full text-sm">
                   {columns[columnId].items.length}
                 </span>
               </div>
 
-              <div className="p-3 min-h-64 bg-zinc-800">
+              <div className="p-3 min-h-[200px] bg-zinc-800">
                 {columns[columnId].items.length === 0 ? (
                   <div className="text-center py-10 text-zinc-500 italic text-sm">
                     Drop tasks here
@@ -142,16 +144,16 @@ function TaskFlow() {
                   columns[columnId].items.map((item) => (
                     <div
                       key={item.id}
-                      className="p-4 mb-3 bg-zinc-700 text-white rounded-md shadow-md cursor-move flex items-center justify-between transform transition-all duration-200 hover:scale-105 hover:shadow-lg"
+                      className="p-3 mb-2 bg-zinc-700 text-white rounded-md shadow-md cursor-move flex items-center justify-between transition-all duration-200 hover:scale-[1.02] hover:shadow-lg"
                       draggable
                       onDragStart={() => handleDragStart(columnId, item)}
                     >
-                      <span className="mr-2">{item.content}</span>
+                      <span className="break-all mr-2">{item.content}</span>
                       <button
                         onClick={() => removeTask(columnId, item.id)}
-                        className="text-zinc-400 hover:text-red-400 transition-colors duration-200 w-6 h-6 flex items-center justify-center rounded-full hover:bg-zinc-600"
+                        className="text-zinc-400 hover:text-red-400 transition-colors duration-200 w-6 h-6 flex-shrink-0 flex items-center justify-center rounded-full hover:bg-zinc-600"
                       >
-                        <span className="text-lg cursor-pointer">x</span>
+                        x
                       </button>
                     </div>
                   ))

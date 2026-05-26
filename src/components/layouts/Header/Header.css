@@ -3,8 +3,10 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 1rem 0;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid #e5e7eb;
+  background-color: #ffffff;
 }
 
 .logo {
@@ -34,6 +36,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .btn-theme,
@@ -63,6 +66,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   transition: background-color 0.2s;
+  display: inline-block;
 }
 
 .btn-login:hover {
@@ -72,10 +76,26 @@
 .header-username {
   font-weight: 500;
   font-size: 0.9rem;
+  color: #374151;
 }
 
-/* Dark mode */
+/* ===== Responsivo ===== */
+@media (max-width: 640px) {
+  .container-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .container-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* ===== Dark mode ===== */
 [data-theme="dark"] .container-header {
+  background-color: #1a1a2e;
   border-bottom-color: #2a2a4a;
 }
 
@@ -88,7 +108,7 @@
 }
 
 [data-theme="dark"] .nav-link:hover {
-  color: #646cff;
+  color: #818cf8;
 }
 
 [data-theme="dark"] .btn-theme,
@@ -99,8 +119,12 @@
 
 [data-theme="dark"] .btn-theme:hover,
 [data-theme="dark"] .btn-logout:hover {
-  background-color: #1a1a2e;
-  border-color: #646cff;
+  background-color: #2a2a4a;
+  border-color: #818cf8;
+}
+
+[data-theme="dark"] .btn-login {
+  background-color: #6366f1;
 }
 
 [data-theme="dark"] .header-username {

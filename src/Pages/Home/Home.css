@@ -1,17 +1,28 @@
 .container-home {
-  padding: 2rem;
+  padding: 2rem 1rem;
 }
 
 .container-home h1 {
   font-size: 1.75rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   color: #1a1a2e;
 }
 
 .container-home p {
   color: #555;
   font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .container-home {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .container-home h1 {
+    font-size: 1.4rem;
+  }
 }
 
 /* Dark mode */
